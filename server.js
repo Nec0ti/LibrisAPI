@@ -11,8 +11,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
+  windowMs: 10 * 60 * 1000,
+  max: 10,
   message: 'You requested too much! PLEASE STOP!',
   standardHeaders: true,
 	legacyHeaders: false,

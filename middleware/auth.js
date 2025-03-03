@@ -4,7 +4,7 @@ module.exports = function(req, res, next) {
   const token = req.header('x-auth-token');
 
   if (!token) {
-    return res.status(401).json({ message: 'Yetkilendirme başarısız, token yok' });
+    return res.status(401).json({ message: 'Authorization failed, no token' });
   }
 
   try {
@@ -12,6 +12,6 @@ module.exports = function(req, res, next) {
     req.user = decoded.user;
     next();
   } catch (err) {
-    res.status(401).json({ message: 'Token geçersiz' });
+    res.status(401).json({ message: 'Invalid Token' });
   }
 };

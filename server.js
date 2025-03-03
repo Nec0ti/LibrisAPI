@@ -27,7 +27,7 @@ app.use('/api/books', booksRoute);
 app.use('/api/users', usersRoute);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to LibrisAPI. If you visit for the first time, you should want to read the documentation at <a>https://librisapi.necoti.dev</a>');
+  res.send('Welcome to LibrisAPI. If you visit for the first time, you should want to read the documentation at <a>https://docs.librisapi.necoti.dev</a>');
 });
 
 app.listen(port, () => {

@@ -1,5 +1,5 @@
 {
-  "name": "librisapi",
+  "name": "@necoti.dev/librisapi",
   "version": "1.0.0",
   "description": "A REST API for managing a book collection",
   "main": "server.js",

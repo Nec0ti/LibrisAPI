@@ -2,6 +2,19 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../models/book');
 const auth = require('../middleware/auth');
+const Joi = require('joi');
+
+const bookSchema = Joi.object({
+  title: Joi.string().required(),
+  author: Joi.string().required(),
+  publicationYear: Joi.number().integer().required(),
+  isbn: Joi.string().required(),
+  summary: Joi.string().required(),
+  coverImage: Joi.string().uri().required(),
+  category: Joi.string().required(),
+  pageCount: Joi.number().integer().required(),
+  language: Joi.string().required()
+});
 
 router.get('/', auth, async (req, res) => {
   try {
@@ -25,6 +38,10 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
+  const { error } = bookSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -46,6 +63,10 @@ router.post('/', auth, async (req, res) => {
 });
 
 router.put('/:id', auth, async (req, res) => {
+  const { error } = bookSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
   try {
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!book) {

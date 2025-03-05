@@ -8,7 +8,7 @@ router.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ username: { $eq: username } });
     if (existingUser) {
       return res.status(400).json({ message: 'Username is in use' });
     }
